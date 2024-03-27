@@ -11,15 +11,15 @@ class todolist extends StatefulWidget {
 
 class _todolistState extends State<todolist> {
   DateTime? _selectedDate;
-  TimeOfDay? initialTime;
+  TimeOfDay initialTime = TimeOfDay.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.orangeAccent,
         title: Text("오늘의 할일이 무엇인가요?"),
       ),
-      backgroundColor: Colors.yellow,
+      backgroundColor: Colors.orangeAccent,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -49,13 +49,12 @@ class _todolistState extends State<todolist> {
                     fontSize: 20,
                     fontWeight: FontWeight.normal,
                   ),
-                    
                   ),
                   Text(
                     _selectedDate != null
                         ? _selectedDate.toString().split(" ")[0]
                         : "",
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 30,fontWeight: FontWeight.w600),
                   ),
                   ElevatedButton(
                       onPressed: (){
@@ -78,7 +77,7 @@ class _todolistState extends State<todolist> {
                 height: 25,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("시간",
                   style: TextStyle(
@@ -86,20 +85,24 @@ class _todolistState extends State<todolist> {
                     fontWeight: FontWeight.normal
                   ),
                   ),
-                  /*ElevatedButton(
+                  Text(
+                    '${initialTime.hour}:${initialTime.minute}',
+                    style: TextStyle(fontSize: 30,fontWeight: FontWeight.w600),
+                  ),
+                  ElevatedButton(
                       onPressed: () async{
-                        final TimeOfDay? timeOfDay=await ShowTimePicker(
+                        final TimeOfDay? timeOfDay = await showTimePicker(
                           context: context,
                           initialTime: initialTime,
                         );
                         if(timeOfDay != null){
-                          setState(() {
+                          setState((){
                             initialTime=timeOfDay;
                           });
                         }
                       },
-                      child: Text("TimePicker"),
-                  ),*/
+                      child: Text('시간 선택'),
+                  ),
                 ],
               ),
               SizedBox(
@@ -114,7 +117,18 @@ class _todolistState extends State<todolist> {
                     fontWeight: FontWeight.normal,
                   ),
                   ),
+
                 ],
+              ),
+              TextField(
+                textAlignVertical: TextAlignVertical.top,
+                maxLines: null,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 120),
+                ),
               )
             ],
           ),

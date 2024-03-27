@@ -14,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return  MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.orangeAccent,
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(
